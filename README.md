@@ -914,6 +914,12 @@ volumes:
 
 這邊基本上都可以找到說明，在頁面上用關鍵字找即可 :relaxed:
 
+補充一下，`depends_on` 這個參數在 swarm 中是會被忽略的，
+
+可參考 [https://docs.docker.com/compose/compose-file/#depends_on](https://docs.docker.com/compose/compose-file/#depends_on)，
+
+The depends_on option is ignored when deploying a stack in swarm mode with a version 3 Compose file。
+
 ### 步驟三
 
 終於可以開始佈署了 :satisfied:
@@ -1067,9 +1073,9 @@ load balancer 之前也有介紹過，那時候是使用 nginx 介紹的，
 
 參考官網 [https://docs.docker.com/engine/swarm/ingress/#using-the-routing-mesh](https://docs.docker.com/engine/swarm/ingress/#using-the-routing-mesh)
 
-注意，這邊是本機中執行，不是在 swarm 中執行了
+注意，這邊是本機中執行，不是在 swarm 中執行了，
 
-先切換到 `haproxy-tutorial` 資料夾中
+先切換到 `haproxy-tutorial` 資料夾中，
 > cd haproxy-tutorial
 
 修改 `haproxy.cfg`，主要是修改成自己的 ip
@@ -1112,7 +1118,7 @@ backend http_back
 
 **方法一** :
 
- ( 這個方法無法取得 HAProxy 的 Log ，但 Load Balance 正常，可能是要設定其他的東西，建議使用方法二 )
+ ( 這個方法無法取得 HAProxy 的 Log ，但 Load Balance 正常，可能是要設定其他的東西，建議使用**方法二** )
 
 接著 build image
 
@@ -1154,7 +1160,7 @@ HAProxy 會透過 Health Check 檢查是否這台 server 可以處理 request（
 
 只要還有一台存在，都可以正常使用網頁（不會掛點）。
 
-也可以瀏覽 [http://localhost:8080/stats/haproxy](http://localhost:8080/stats/haproxy) 查看狀態
+也可以瀏覽 [http://localhost:8080/stats/haproxy](http://localhost:8080/stats/haproxy) 查看狀態，
 
 ![](https://i.imgur.com/wK2DP0O.png)
 
